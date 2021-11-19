@@ -48,10 +48,11 @@ background-attachment: fixed;">
             <thead>
             <tr>
                 <th>流水号</th>
-                <th>图书号</th>
-                <th>读者证号</th>
+                <th>图书名</th>
+                <th>读者姓名</th>
                 <th>借出日期</th>
                 <th>归还日期</th>
+                <th>超出金额</th>
                 <th>删除</th>
             </tr>
             </thead>
@@ -59,10 +60,11 @@ background-attachment: fixed;">
             <c:forEach items="${list}" var="alog">
                 <tr>
                     <td><c:out value="${alog.ser_num}"></c:out></td>
-                    <td><c:out value="${alog.bookId}"></c:out></td>
-                    <td><c:out value="${alog.readerId}"></c:out></td>
+                    <td><c:out value="${alog.name}"></c:out></td>
+                    <td><c:out value="${alog.username}"></c:out></td>
                     <td><c:out value="${alog.lendDateStr}"></c:out></td>
                     <td><c:out value="${alog.backDateStr}"></c:out></td>
+                    <td><c:out value="${alog.overdueamount}"></c:out></td>
                     <td>
                         <a href="deletelend.html?serNum=<c:out value='${alog.ser_num}'></c:out>">
                             <c:if test="${!empty alog.backDateStr}">

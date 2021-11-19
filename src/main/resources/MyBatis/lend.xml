@@ -2,21 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.library.dao.LendDao">
     <update id="returnBookOne">
-        update lend_list set back_date = sysdate() where book_id = #{book_id}
-        and reader_id = #{reader_id} and back_date is null
+update lend_list set back_date = sysdate(), overdueamount=(case  when TIMESTAMPDIFF(MONTH,lend_date,DATE_FORMAT(NOW(), '%Y-%m-%d'))>=3  then 10.00 else 0.0 end ) where book_id = #{book_id}
+        and  reader_id = #{reader_id} and back_date is null
     </update>
     <update id="returnBookTwo" parameterType="long">
         update book_info set number = number + 1 where book_id = #{book_id}
     </update>
     <insert id="lendBookOne">
         insert into lend_list values
-        (null , #{book_id} , #{reader_id} , sysdate() , null)
+        (null , #{book_id} , #{reader_id} , sysdate() , null,0.0);
+
     </insert>
     <update id="lendBookTwo" parameterType="long">
         update book_info set number = number - 1 where book_id = #{book_id}
     </update>
     <select id="lendList" resultType="com.library.bean.Lend">
-        select * from lend_list
+      select a.*,b.name,c.name as  username from lend_list a left join book_info b on a.book_id=b.book_id left join reader_info c on a.reader_id=c.reader_id order
+      by a.back_date desc
     </select>
     <select id="myLendList" resultType="com.library.bean.Lend" parameterType="long">
         select * from lend_list where reader_id = #{reader_id}

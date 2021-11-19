@@ -8,6 +8,15 @@ package com.library.bean;
 public class LendDate extends Lend {
     private String lendDateStr;
     private String backDateStr;
+    private String actualDateStr;
+
+    public String getActualDateStr() {
+        return actualDateStr;
+    }
+
+    public void setActualDateStr(String actualDateStr) {
+        this.actualDateStr = actualDateStr;
+    }
 
     public String getLendDateStr() {
         return lendDateStr;

@@ -7,9 +7,37 @@ public class Lend implements Serializable {
 
     private long ser_num;
     private long book_id;
+    private String name;
     private long reader_id;
+    private String username;
     private Date lend_date;
     private Date back_date;
+    private double overdueamount;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    public double getOverdueamount() {
+        return overdueamount;
+    }
+
+    public void setOverdueamount(double overdueamount) {
+        this.overdueamount = overdueamount;
+    }
 
     public long getReaderId() {
         return reader_id;
